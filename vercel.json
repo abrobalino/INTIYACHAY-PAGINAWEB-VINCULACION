@@ -1,0 +1,27 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/instalaciones",
+      "destination": "/nuestras-instalciones/",
+      "permanent": false
+    },
+    {
+      "source": "/nosotros",
+      "destination": "/acerca-de-nosotros/",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}

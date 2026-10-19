@@ -1,0 +1,101 @@
+[
+  {
+    "id": "logo",
+    "src": "/assets/logo.png",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2021/08/cropped-Logo.png",
+    "width": 270,
+    "height": 70,
+    "alt": "Logo horizontal original, con símbolo y nombre incluidos",
+    "uso": "header y footer"
+  },
+  {
+    "id": "portada-estudiantes",
+    "src": "/assets/portada-estudiantes.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2026/08/WhatsApp-Image-2026-07-15-at-10.58.43-AM-1536x1152.jpeg",
+    "width": 1536,
+    "height": 1152,
+    "alt": "Tres estudiantes con uniforme verde en el jardín",
+    "uso": "hero de inicio"
+  },
+  {
+    "id": "aula-comunidad",
+    "src": "/assets/aula-comunidad.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-02-at-11.2l4.45-AM.jpeg",
+    "width": 1463,
+    "height": 1600,
+    "alt": "Actividad de grupo en un aula con mesas y materiales",
+    "uso": "instalaciones y oferta educativa"
+  },
+  {
+    "id": "huerto-aprendizaje",
+    "src": "/assets/huerto-aprendizaje.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-02-at-11.23.04-AM.jpeg",
+    "width": 595,
+    "height": 1062,
+    "alt": "Estudiante trabajando con una herramienta en la tierra",
+    "uso": "modelo educativo y huerto"
+  },
+  {
+    "id": "huerto-cosecha",
+    "src": "/assets/huerto-cosecha.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-02-at-11.26.47-AM.jpeg",
+    "width": 1600,
+    "height": 900,
+    "alt": "Dos estudiantes mostrando productos del huerto",
+    "uso": "vida escolar y galería"
+  },
+  {
+    "id": "actividad-patio",
+    "src": "/assets/actividad-patio.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-02-at-11.24.43-AM.jpeg",
+    "width": 1600,
+    "height": 1063,
+    "alt": "Actividad grupal en un espacio cubierto",
+    "uso": "instalaciones y galería"
+  },
+  {
+    "id": "comunidad",
+    "src": "/assets/comunidad.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-02-at-11.24.44-AM.jpeg",
+    "width": 1600,
+    "height": 1063,
+    "alt": "Fotografía grupal de la comunidad en un espacio cubierto",
+    "uso": "nosotros"
+  },
+  {
+    "id": "arte-mural",
+    "src": "/assets/arte-mural.jpeg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-02-at-11.24.4004-AM.jpeg",
+    "width": 1600,
+    "height": 1063,
+    "alt": "Personas pintando un mural",
+    "uso": "modelo educativo y galería"
+  },
+  {
+    "id": "jardin-actividad",
+    "src": "/assets/jardin-actividad.jpg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2021/08/20160122_1226523.jpg",
+    "width": 500,
+    "height": 375,
+    "alt": "Actividad grupal al aire libre en el jardín",
+    "uso": "instalaciones y galería"
+  },
+  {
+    "id": "cultura-desfile",
+    "src": "/assets/cultura-desfile.jpg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2021/08/DANZA-DESFILE11.jpg",
+    "width": 500,
+    "height": 375,
+    "alt": "Participantes en un desfile cultural",
+    "uso": "vida escolar y galería"
+  },
+  {
+    "id": "huerto-siembra",
+    "src": "/assets/huerto-siembra.jpg",
+    "sourceUrl": "https://intiyachay.edu.ec/wp-content/uploads/2021/08/20181123_0836401.jpg",
+    "width": 500,
+    "height": 375,
+    "alt": "Estudiantes trabajando con plantas y recipientes",
+    "uso": "modelo educativo y galería"
+  }
+]

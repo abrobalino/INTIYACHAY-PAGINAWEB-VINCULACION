@@ -1,0 +1,49 @@
+(()=>{'use strict';
+const menu=document.querySelector('.menu-toggle'),nav=document.querySelector('#mobile-menu');
+function setMenu(open){if(!menu||!nav)return;menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');nav.hidden=!open;}
+menu?.addEventListener('click',()=>setMenu(menu.getAttribute('aria-expanded')!=='true'));
+nav?.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.getAttribute('aria-expanded')==='true'){setMenu(false);menu.focus()}});
+matchMedia('(min-width: 901px)').addEventListener('change',e=>{if(e.matches)setMenu(false)});
+document.querySelectorAll('[data-year]').forEach(el=>{el.textContent=new Intl.DateTimeFormat('en',{year:'numeric',timeZone:'America/Guayaquil'}).format(new Date())});
+function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}if(!id)return;const el=document.getElementById(id);if(el?.tagName==='DETAILS'){el.open=true;requestAnimationFrame(()=>el.scrollIntoView({behavior:'auto',block:'start'}))}}
+revealHash();window.addEventListener('hashchange',revealHash);
+const levels={'inicial':'Educación Inicial','basica-elemental':'Básica Elemental','basica-media':'Básica Media','basica-superior':'Básica Superior'};
+const selected=new URLSearchParams(location.search).get('interes');const email=document.getElementById('email-cta');if(email&&Object.hasOwn(levels,selected)){document.getElementById('interest-label').textContent='Consulta sobre '+levels[selected]+'. Conoce la propuesta y disponibilidad de este nivel.';email.href='mailto:info@intiyachay.edu.ec?subject='+encodeURIComponent('Consulta sobre '+levels[selected]+' — Intiyachay')+'&body='+encodeURIComponent('Hola, me gustaría recibir información sobre '+levels[selected]+'. Gracias.');}
+const photos=[...document.querySelectorAll('.gallery-item')],dialog=document.getElementById('photo-dialog');let visible=photos,current=0,origin=null;
+document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));photos.forEach(p=>{p.hidden=btn.dataset.filter!=='todo'&&p.dataset.category!==btn.dataset.filter});visible=photos.filter(p=>!p.hidden);document.getElementById('gallery-status').textContent=visible.length+' fotografías';}));
+function showPhoto(){const p=visible[current],img=document.getElementById('photo-full');img.src=p.dataset.photo;img.alt=p.querySelector('img').alt;document.getElementById('photo-caption').textContent=p.dataset.caption;document.getElementById('photo-count').textContent=String(current+1).padStart(2,'0')+' / '+String(visible.length).padStart(2,'0');}
+photos.forEach(p=>p.addEventListener('click',()=>{origin=p;current=visible.indexOf(p);showPhoto();dialog.showModal();document.body.style.overflow='hidden';dialog.querySelector('[data-close]').focus()}));
+function step(delta){if(!visible.length)return;current=(current+delta+visible.length)%visible.length;showPhoto()}
+dialog?.querySelector('[data-close]').addEventListener('click',()=>dialog.close());dialog?.querySelector('[data-prev]').addEventListener('click',()=>step(-1));dialog?.querySelector('[data-next]').addEventListener('click',()=>step(1));
+dialog?.addEventListener('close',()=>{document.body.style.overflow='';origin?.focus()});dialog?.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();step(-1)}if(e.key==='ArrowRight'){e.preventDefault();step(1)}});
+dialog?.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
+})();
+
+(()=>{'use strict';
+const video=document.getElementById('hero-video'),play=document.getElementById('hero-play'),sound=document.getElementById('video-sound'),status=document.getElementById('video-status');
+function updateSound(){if(!video||!sound)return;sound.setAttribute('aria-pressed',String(!video.muted));sound.setAttribute('aria-label',video.muted?'Activar sonido del vídeo':'Silenciar vídeo');sound.innerHTML=(video.muted?'Activar sonido':'Silenciar')+' <span aria-hidden="true">♪</span>';}
+if(video){const frame=video.closest('.video-frame');play.addEventListener('click',async()=>{status.hidden=false;status.textContent='Cargando vídeo…';play.hidden=true;try{await video.play();status.hidden=true;}catch{play.hidden=false;status.textContent='No se pudo iniciar el vídeo. Puedes intentarlo de nuevo o abrir el original.';document.getElementById('video-fallback').hidden=false;}});video.addEventListener('playing',()=>{play.hidden=true;frame.classList.add('is-playing');status.hidden=true;});video.addEventListener('pause',()=>{play.hidden=false;play.setAttribute('aria-label','Continuar vídeo de Intiyachay');play.querySelector('span:last-child').textContent='Continuar el vídeo';});video.addEventListener('error',()=>{play.hidden=false;status.hidden=false;status.textContent='El vídeo original no está disponible en este momento.';document.getElementById('video-fallback').hidden=false;});sound.addEventListener('click',()=>{video.muted=!video.muted;updateSound()});video.addEventListener('volumechange',updateSound);document.addEventListener('visibilitychange',()=>{if(document.hidden&&!video.paused)video.pause()});}
+const experienceData=[{src:'/assets/comunidad-actividad.jpeg',alt:'Comunidad de Intiyachay reunida',title:'Crecer con otros lo cambia todo.',text:'Un lugar para compartir, construir vínculos y aprender en comunidad.',href:'/acerca-de-nosotros/',label:'Conoce nuestra comunidad'},{src:'/assets/estudiantes-huerto2.jpeg',alt:'Estudiantes en el huerto escolar',title:'La naturaleza es parte de la clase.',text:'Observar, cultivar y cuidar. Experiencias que nos conectan con la vida y con nuestro entorno.',href:'/modelo-educativo/',label:'Descubre nuestro modelo'},{src:'/assets/actividad-artistica.jpeg',alt:'Estudiantes creando proyectos artísticos',title:'Las ideas merecen tomar color.',text:'Exploramos nuevas formas de expresarnos y de crear algo juntos.',href:'/nuestras-instalciones/#galeria',label:'Explora nuestra galería'}];let experienceIndex=0;
+function showExperience(i){experienceIndex=(i+experienceData.length)%experienceData.length;const d=experienceData[experienceIndex],img=document.getElementById('experience-image');if(!img)return;img.src=d.src;img.alt=d.alt;document.getElementById('experience-count').textContent='0'+(experienceIndex+1)+' / 03';document.getElementById('experience-title').textContent=d.title;document.getElementById('experience-text').textContent=d.text;const a=document.getElementById('experience-link');a.href=d.href;a.textContent=d.label+' ↗';document.querySelectorAll('[data-experience]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.experience)===experienceIndex)));}
+document.querySelectorAll('[data-experience]').forEach(b=>b.addEventListener('click',()=>showExperience(Number(b.dataset.experience))));document.getElementById('experience-prev')?.addEventListener('click',()=>showExperience(experienceIndex-1));document.getElementById('experience-next')?.addEventListener('click',()=>showExperience(experienceIndex+1));
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.07});document.querySelectorAll('.pillars article,.story,.level-rows>a,.spaces-grid article,.location-card,.editorial-copy').forEach(el=>{el.classList.add('reveal-ready');observer.observe(el)});}
+})();
+
+(()=>{'use strict';
+const card=document.querySelector('.student-photo-card');if(card&&matchMedia('(hover:hover) and (prefers-reduced-motion:no-preference)').matches){card.addEventListener('pointermove',event=>{const box=card.getBoundingClientRect();card.style.setProperty('--px',((event.clientX-box.left)/box.width*100)+'%');card.style.setProperty('--py',((event.clientY-box.top)/box.height*100)+'%')});}
+const track=document.getElementById('admission-track');if(!track)return;const slides=[...track.querySelectorAll('.admission-slide')],dots=[...document.querySelectorAll('[data-admission]')];let active=0,frame;
+function update(i){active=i;document.getElementById('admission-count').textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');dots.forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)));}
+function go(i){const next=(i+slides.length)%slides.length;const offset=slides[next].getBoundingClientRect().left-track.getBoundingClientRect().left+track.scrollLeft;track.scrollTo({left:offset,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});update(next);}
+document.getElementById('admission-prev').addEventListener('click',()=>go(active-1));document.getElementById('admission-next').addEventListener('click',()=>go(active+1));dots.forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.admission))));track.addEventListener('keydown',e=>{if(e.target!==track)return;if(e.key==='ArrowRight'){e.preventDefault();go(active+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(active-1)}});track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const left=track.getBoundingClientRect().left;let i=0,closest=Infinity;slides.forEach((slide,n)=>{const distance=Math.abs(slide.getBoundingClientRect().left-left);if(distance<closest){closest=distance;i=n}});update(i)})},{passive:true});
+(function initHeroVideo(){
+  const heroVid = document.getElementById('hero-school-video');
+  if (heroVid) {
+    heroVid.muted = true;
+    heroVid.playsInline = true;
+    const p = heroVid.play();
+    if (p !== undefined) {
+      p.catch(() => {});
+    }
+  }
+})();
