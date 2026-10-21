@@ -15,7 +15,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 115px
+  scroll-padding-top: 115px;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -23,7 +25,19 @@ body {
   background: var(--white);
   color: var(--ink);
   font: 16px/1.7 Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+a {
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -1831,8 +1845,9 @@ dialog button {
 }
 
 @media(max-width:380px) {
-  .hero h1 {
-    font-size: 49px
+  .hero h1,
+  .photo-hero h1 {
+    font-size: clamp(30px, 9.5vw, 42px) !important;
   }
 
   .hero-photo {
@@ -2817,8 +2832,9 @@ h3 {
   }
 
   .location-card .text-link {
-    margin-top: 0;
-    margin-left: 15px
+    display: inline-block;
+    margin-top: 14px;
+    margin-left: 0;
   }
 
   .location-card h3 {
@@ -3801,7 +3817,7 @@ body::before {
 .social-links-list {
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  flex-wrap: wrap !important;
   gap: 8px !important;
   align-items: center !important;
 }
@@ -4099,10 +4115,13 @@ body::before {
   display: block;
 }
 
-.grade-thumb span {
+.grade-thumb span,
+.grade-thumb figcaption {
   font-size: 11px;
   font-weight: 600;
   color: #1B3D22;
+  margin: 0;
+  line-height: 1.35;
 }
 
 /* Tarjetas Históricas (Acerca de nosotros) */
@@ -4854,5 +4873,10 @@ body::before {
 
   .tiktok-card-bio {
     font-size: 13px !important;
+  }
+
+  .history-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
   }
 }
