@@ -7,7 +7,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.getAttribute(
 matchMedia('(min-width: 901px)').addEventListener('change',e=>{if(e.matches)setMenu(false)});
 document.querySelectorAll('[data-year]').forEach(el=>{el.textContent=new Intl.DateTimeFormat('en',{year:'numeric',timeZone:'America/Guayaquil'}).format(new Date())});
 function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}if(!id)return;const el=document.getElementById(id);if(el?.tagName==='DETAILS'){el.open=true;requestAnimationFrame(()=>el.scrollIntoView({behavior:'auto',block:'start'}))}}
-revealHash();window.addEventListener('hashchange',revealHash);
+function centerActiveNav(){const a=document.querySelector('.desktop-nav a[aria-current="page"]');if(a&&window.innerWidth<=900){requestAnimationFrame(()=>{a.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})})}}
+revealHash();window.addEventListener('hashchange',revealHash);window.addEventListener('DOMContentLoaded',centerActiveNav);centerActiveNav();
 const levels={'inicial':'Educación Inicial','basica-elemental':'Básica Elemental','basica-media':'Básica Media','basica-superior':'Básica Superior'};
 const selected=new URLSearchParams(location.search).get('interes');const email=document.getElementById('email-cta');if(email&&Object.hasOwn(levels,selected)){document.getElementById('interest-label').textContent='Consulta sobre '+levels[selected]+'. Conoce la propuesta y disponibilidad de este nivel.';email.href='mailto:info@intiyachay.edu.ec?subject='+encodeURIComponent('Consulta sobre '+levels[selected]+' — Intiyachay')+'&body='+encodeURIComponent('Hola, me gustaría recibir información sobre '+levels[selected]+'. Gracias.');}
 const photos=[...document.querySelectorAll('.gallery-item')],dialog=document.getElementById('photo-dialog');let visible=photos,current=0,origin=null;
